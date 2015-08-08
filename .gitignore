@@ -24,3 +24,4 @@ smart-ops-board-cache/.springBeans
 /Servers/
 smart-ops-board-app/target/cucumber/report.js
 *.springBeans
+/target/
