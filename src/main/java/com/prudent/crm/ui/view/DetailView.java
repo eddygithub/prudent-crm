@@ -1,4 +1,4 @@
-package com.prudent.crm.view;
+package com.prudent.crm.ui.view;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -74,8 +74,6 @@ public class DetailView extends VerticalLayout implements View{
 
 	@Override
 	public void enter(ViewChangeEvent event) {
-		// TODO Auto-generated method stub
-
 		Notification.show("Welcome to the Detail View");
 	}
 

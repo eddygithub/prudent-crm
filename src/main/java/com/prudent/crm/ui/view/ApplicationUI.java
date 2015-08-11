@@ -1,4 +1,4 @@
-package com.prudent.crm.view;
+package com.prudent.crm.ui.view;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,12 +29,7 @@ public class ApplicationUI extends UI {
 
         final CssLayout navigationBar = new CssLayout();
         navigationBar.addStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
-        navigationBar.addComponent(createNavigationButton("Home",
-                MainView.VIEW_NAME));
-        navigationBar.addComponent(createNavigationButton("Client Detail",
-                DetailView.VIEW_NAME));
-        navigationBar.addComponent(createNavigationButton("Search Result",
-                ResultView.VIEW_NAME));
+        navigationBar.addComponent(createNavigationButton("Home", MainView.VIEW_NAME));
         root.addComponent(navigationBar);
 
         final Panel viewContainer = new Panel();

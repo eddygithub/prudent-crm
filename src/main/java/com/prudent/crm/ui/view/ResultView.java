@@ -1,5 +1,14 @@
-package com.prudent.crm.view;
+package com.prudent.crm.ui.view;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+import com.prudent.crm.model.Customer;
+import com.prudent.crm.persistent.services.DataStoreService;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.ExternalResource;
@@ -9,7 +18,6 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.Notification;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
 
@@ -19,12 +27,15 @@ public class ResultView extends VerticalLayout implements View {
 
 	private static final long serialVersionUID = 1L;
 
+	@Qualifier("inMemoryDataStore")
+	@Autowired
+	private DataStoreService dataService;
+	
 	@SuppressWarnings({ "unused", "serial" })
 	public ResultView() {
 		setSizeFull();
 
 		VerticalLayout layout = new VerticalLayout();
-
 		Image image = new Image(null, new ExternalResource(
 				"https://media.licdn.com/mpr/mpr/p/7/005/075/3bb/1e40bf6.jpg"));
 		Button button = new Button("Go to Main Page", new Button.ClickListener() {
@@ -70,12 +81,30 @@ public class ResultView extends VerticalLayout implements View {
 
 	};
 
+	void displayCustomer(List<Customer> customerList){
+		//TODO Amanda figure out how to bind customerList to the table
+	}
+	
 	@Override
 	public void enter(ViewChangeEvent event) {
-		// TODO Auto-generated method stub
-
-		Notification.show("Welcome to the Result View");
+		String paramStr = null;
+		List<Customer> customerList = new ArrayList<Customer>();
+		if((paramStr = event.getParameters()).startsWith("ssn")){
+			Optional<Customer> customer = dataService.findBySSN(Integer.parseInt(paramStr.split("=")[1]));
+			if(customer.isPresent()){
+				customerList.add(customer.get());
+			}
+		}else if(paramStr.startsWith("lastName")){
+			String[] params = paramStr.split(",");
+			String lastName = getValue(params[0], "=");
+			String firstName = getValue(params[0], "=");
+			customerList.addAll(dataService.findByLastNameAndFirstName(lastName, firstName));
+		}
+		displayCustomer(customerList);
 	}
 
 
+	private String getValue(String str, String delimiator){
+		return str.split(delimiator)[1];
+	}
 }

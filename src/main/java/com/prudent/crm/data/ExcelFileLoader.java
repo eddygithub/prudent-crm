@@ -10,9 +10,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.prudent.crm.domain.Address;
-import com.prudent.crm.domain.Customer;
-import com.prudent.crm.domain.MaritalStatus;
+import com.prudent.crm.model.Address;
+import com.prudent.crm.model.Customer;
+import com.prudent.crm.model.MaritalStatus;
 import com.prudent.crm.persistent.mongo.repository.CustomerRepository;
 
 @Component

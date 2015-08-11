@@ -1,4 +1,4 @@
-package com.prudent.crm.view;
+package com.prudent.crm.ui.view;
 
 import javax.annotation.PostConstruct;
 
@@ -20,7 +20,7 @@ import com.vaadin.ui.VerticalLayout;
 public class MainView extends VerticalLayout implements View {
 	public static final String VIEW_NAME="";
 	private static final long serialVersionUID = 1L;
-
+	
 	@SuppressWarnings("serial")
 	@PostConstruct
 	void init(){
@@ -33,8 +33,6 @@ public class MainView extends VerticalLayout implements View {
 		GridLayout grid = new GridLayout(6, 2);
 		grid.setSpacing(true);
 
-		/* grid.setWidth("100px"); */
-		/* grid.setHeight(200, Sizeable.UNITS_PIXELS); */
 		Label ssnText = new Label("Search By SSN:   ");
 		TextField ssn = new TextField("");
 
@@ -47,14 +45,14 @@ public class MainView extends VerticalLayout implements View {
 		Button ssnGo = new Button("Go", new Button.ClickListener() {
 			@Override
 			public void buttonClick(ClickEvent event) {
-				// go to search by ssn
+				getUI().getNavigator().navigateTo(ResultView.VIEW_NAME + "/ssn=" + ssn.getValue());
 			}
 		});
 
 		Button nameGo = new Button("Go", new Button.ClickListener() {
 			@Override
 			public void buttonClick(ClickEvent event) {
-				// go to search by name
+				getUI().getNavigator().navigateTo(ResultView.VIEW_NAME + "/lastName=" + lastName.getValue() + ",/firstName=" + firstName.getValue());
 			}
 		});
 

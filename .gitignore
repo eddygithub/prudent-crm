@@ -9,6 +9,7 @@ jsonData/**
 src/main/generated-sources
 src/main/web/public/tests/node_modules
 .idea/**
+*.log
 
 *.iml
 *.launch
