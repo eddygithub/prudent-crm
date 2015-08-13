@@ -20,11 +20,22 @@ apply plugin: 'war'
 
 
 war {
-    baseName = 'demo'
+    baseName = 'com.prudent.crm'
     version = '0.0.1-SNAPSHOT'
 }
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ["src/main/java"]
+		}
+		resources {
+			srcDirs = ["src/main/resources", "src/main/web"]
+		}
+	}
+}
 
 repositories {
     mavenCentral()
@@ -36,20 +47,15 @@ configurations {
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator")
-    compile("com.vaadin:vaadin-spring-boot-starter:1.0.0.beta3")
 	compile("org.springframework.boot:spring-boot-starter-data-mongodb")
 	compile("org.apache.poi:poi-ooxml:3.12")
 	compile("org.apache.poi:poi:3.12")
-    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+	compile("org.springframework.boot:spring-boot-starter-security")
+	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+	compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-tomcat")
     testCompile("org.springframework.boot:spring-boot-starter-test") 
 }
-
-dependencyManagement {
-	imports { 
-		mavenBom "com.vaadin:vaadin-bom:7.4.5" 
-	}
-}
-
 
 eclipse {
     classpath {
